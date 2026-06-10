@@ -7,12 +7,37 @@ let w;
 let h;
 let particles = [];
 
-// Cuenta regresiva solicitada:
-// 730 días + 24 horas + 60 segundos.
-// Se calcula en segundos para que avance correctamente.
-let tiempoRestante = (730 * 24 * 60 * 60) + (24 * 60 * 60) + 60;
+/*
+  CONTADOR QUE NO SE REINICIA AL ACTUALIZAR LA PÁGINA
+
+  Duración configurada:
+  365 días + 24 horas + 60 segundos.
+
+  La primera vez que se abre la página, se guarda la fecha final
+  en el navegador usando localStorage. Así, aunque se actualice la página,
+  el contador continuará desde donde debe ir.
+*/
+
+const DURACION_CONTADOR =
+  ((365 * 24 * 60 * 60) +  // 365 días
+  (24 * 60 * 60) +         // 24 horas
+  60) * 1000;              // 60 segundos, convertido todo a milisegundos
+
+const CLAVE_FECHA_FINAL = "fechaFinalContadorJoselin";
+
+let fechaFinalGuardada = localStorage.getItem(CLAVE_FECHA_FINAL);
+
+if (!fechaFinalGuardada) {
+  fechaFinalGuardada = Date.now() + DURACION_CONTADOR;
+  localStorage.setItem(CLAVE_FECHA_FINAL, fechaFinalGuardada);
+}
+
+const fechaFinal = Number(fechaFinalGuardada);
 
 function actualizarContador() {
+  const ahora = Date.now();
+  const tiempoRestante = fechaFinal - ahora;
+
   if (tiempoRestante <= 0) {
     contador.innerHTML = `
       <div class="tiempo" style="grid-column: 1 / -1;">
@@ -23,10 +48,11 @@ function actualizarContador() {
     return;
   }
 
-  const dias = Math.floor(tiempoRestante / 86400);
-  const horas = Math.floor((tiempoRestante % 86400) / 3600);
-  const minutos = Math.floor((tiempoRestante % 3600) / 60);
-  const segundos = tiempoRestante % 60;
+  const totalSegundos = Math.floor(tiempoRestante / 1000);
+  const dias = Math.floor(totalSegundos / 86400);
+  const horas = Math.floor((totalSegundos % 86400) / 3600);
+  const minutos = Math.floor((totalSegundos % 3600) / 60);
+  const segundos = totalSegundos % 60;
 
   contador.innerHTML = `
     <div class="tiempo">
@@ -49,8 +75,6 @@ function actualizarContador() {
       <span class="etiqueta">Segundos</span>
     </div>
   `;
-
-  tiempoRestante--;
 }
 
 setInterval(actualizarContador, 1000);
