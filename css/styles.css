@@ -185,27 +185,51 @@ canvas {
   justify-content: center;
 }
 
+/* ===== HOJA ELEGANTE DE LA CARTA ===== */
 .papel {
   width: min(94vw, 850px);
-  background: rgba(255, 253, 248, 0.96);
   color: #3b2631;
-  border-radius: 28px;
-  padding: clamp(25px, 5vw, 58px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-  border: 1px solid rgba(255, 182, 210, 0.7);
+  border-radius: 24px;
+  padding: clamp(28px, 5vw, 62px);
   position: relative;
   overflow: hidden;
   animation: subirCarta 1.2s ease both;
+
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,248,244,0.94)),
+    radial-gradient(circle at top left, rgba(255, 198, 221, 0.28), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(230, 190, 140, 0.20), transparent 35%);
+
+  border: 1px solid rgba(214, 164, 91, 0.50);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.44),
+    inset 0 0 0 10px rgba(255, 255, 255, 0.42),
+    inset 0 0 0 12px rgba(214, 164, 91, 0.16);
 }
 
 .papel::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at top left, rgba(255, 143, 189, 0.2), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(255, 47, 125, 0.16), transparent 35%);
+  inset: 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(214, 164, 91, 0.42);
   pointer-events: none;
+  z-index: 1;
+}
+
+.papel::after {
+  content: "E  ·  J";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4rem, 13vw, 8rem);
+  letter-spacing: 8px;
+  color: rgba(219, 47, 114, 0.055);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .contenido-carta {
@@ -215,38 +239,46 @@ canvas {
 
 .encabezado {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 34px;
 }
 
 .encabezado .fecha-carta {
   color: #8a4c66;
   margin-bottom: 18px;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .encabezado h2 {
-  color: #db2f72;
+  color: #b8235f;
   font-size: clamp(1.8rem, 5vw, 3rem);
   margin-bottom: 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
 }
 
 .linea {
-  width: 130px;
-  height: 3px;
-  margin: 16px auto 0;
-  background: linear-gradient(90deg, transparent, #ff2f7d, transparent);
+  width: 160px;
+  height: 2px;
+  margin: 18px auto 0;
+  background: linear-gradient(90deg, transparent, #d6a45b, #db2f72, #d6a45b, transparent);
   border-radius: 20px;
 }
 
 .texto p {
   font-size: clamp(1rem, 2.5vw, 1.16rem);
-  line-height: 1.9;
+  line-height: 1.95;
   margin-bottom: 17px;
   text-align: justify;
+  color: #3f2c35;
+}
+
+.texto p::first-letter {
+  color: #b8235f;
 }
 
 .despedida {
-  margin-top: 28px;
+  margin-top: 34px;
   text-align: right;
   color: #7b2b50;
   font-size: 1.12rem;
@@ -254,8 +286,8 @@ canvas {
 }
 
 .firma {
-  color: #db2f72;
-  font-size: 1.45rem;
+  color: #b8235f;
+  font-size: 1.55rem;
   font-weight: 800;
   font-family: "Segoe Script", "Brush Script MT", cursive;
 }
@@ -375,9 +407,23 @@ canvas {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .papel {
+    border-radius: 20px;
+    padding: 32px 24px;
+  }
+
+  .papel::before {
+    inset: 12px;
+  }
+
+  .papel::after {
+    font-size: 4.5rem;
+    letter-spacing: 4px;
+  }
+
   .texto p {
     text-align: left;
-    line-height: 1.75;
+    line-height: 1.78;
   }
 
   .despedida {
