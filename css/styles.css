@@ -40,7 +40,7 @@ canvas {
 }
 
 .inicio-card {
-  width: min(92vw, 560px);
+  width: min(92vw, 600px);
   padding: 34px 26px;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.08);
@@ -99,8 +99,55 @@ canvas {
 
 .fecha {
   color: #ffeaf2;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   font-size: 1.05rem;
+}
+
+.bloque-contador {
+  margin: 22px auto 26px;
+  padding: 18px 16px;
+  border-radius: 22px;
+  background: rgba(255, 47, 125, 0.16);
+  border: 1px solid rgba(255, 198, 221, 0.35);
+  box-shadow: 0 0 25px rgba(255, 47, 125, 0.22);
+}
+
+.frase-contador {
+  color: #ffeaf2;
+  font-size: clamp(1rem, 3vw, 1.22rem);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  text-shadow: 0 0 12px rgba(255, 79, 145, 0.7);
+}
+
+.contador {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.tiempo {
+  padding: 12px 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.numero {
+  display: block;
+  color: #ffffff;
+  font-size: clamp(1.4rem, 5vw, 2.3rem);
+  font-weight: 900;
+  text-shadow: 0 0 15px rgba(255, 79, 145, 0.9);
+}
+
+.etiqueta {
+  display: block;
+  color: #ffc4db;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .boton {
@@ -322,6 +369,10 @@ canvas {
 
   .corazon::after {
     top: -39px;
+  }
+
+  .contador {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .texto p {
