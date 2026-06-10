@@ -1,10 +1,60 @@
 const canvas = document.getElementById("fondo");
 const ctx = canvas.getContext("2d");
 const btnAbrir = document.getElementById("btnAbrir");
+const contador = document.getElementById("contador");
 
 let w;
 let h;
 let particles = [];
+
+// Cuenta regresiva solicitada:
+// 730 días + 24 horas + 60 segundos.
+// Se calcula en segundos para que avance correctamente.
+let tiempoRestante = (730 * 24 * 60 * 60) + (24 * 60 * 60) + 60;
+
+function actualizarContador() {
+  if (tiempoRestante <= 0) {
+    contador.innerHTML = `
+      <div class="tiempo" style="grid-column: 1 / -1;">
+        <span class="numero">❤️</span>
+        <span class="etiqueta">El tiempo terminó, pero nunca borrará lo que siento por ti.</span>
+      </div>
+    `;
+    return;
+  }
+
+  const dias = Math.floor(tiempoRestante / 86400);
+  const horas = Math.floor((tiempoRestante % 86400) / 3600);
+  const minutos = Math.floor((tiempoRestante % 3600) / 60);
+  const segundos = tiempoRestante % 60;
+
+  contador.innerHTML = `
+    <div class="tiempo">
+      <span class="numero">${dias}</span>
+      <span class="etiqueta">Días</span>
+    </div>
+
+    <div class="tiempo">
+      <span class="numero">${horas}</span>
+      <span class="etiqueta">Horas</span>
+    </div>
+
+    <div class="tiempo">
+      <span class="numero">${minutos}</span>
+      <span class="etiqueta">Minutos</span>
+    </div>
+
+    <div class="tiempo">
+      <span class="numero">${segundos}</span>
+      <span class="etiqueta">Segundos</span>
+    </div>
+  `;
+
+  tiempoRestante--;
+}
+
+setInterval(actualizarContador, 1000);
+actualizarContador();
 
 function ajustarCanvas() {
   w = canvas.width = window.innerWidth;
