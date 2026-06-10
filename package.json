@@ -1,0 +1,22 @@
+{
+  "name": "carta-para-joselin",
+  "version": "1.0.0",
+  "description": "Carta animada para abrir como página web.",
+  "private": true,
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "carta",
+    "web",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "Emanuel",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

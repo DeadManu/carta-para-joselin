@@ -1,0 +1,335 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(255, 105, 180, 0.28), transparent 35%),
+    radial-gradient(circle at bottom, rgba(128, 0, 128, 0.34), transparent 35%),
+    linear-gradient(135deg, #080008, #210019 45%, #3b0829 100%);
+  color: #ffffff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.pantalla-inicio {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.inicio-card {
+  width: min(92vw, 560px);
+  padding: 34px 26px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 198, 221, 0.28);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 45px rgba(255, 51, 130, 0.38);
+  animation: aparecer 1.4s ease both;
+}
+
+.corazon {
+  width: 105px;
+  height: 105px;
+  background: #ff2f7d;
+  margin: 18px auto 34px;
+  transform: rotate(45deg);
+  position: relative;
+  box-shadow: 0 0 28px #ff2f7d, 0 0 70px rgba(255, 47, 125, 0.75);
+  animation: latir 1.15s infinite;
+}
+
+.corazon::before,
+.corazon::after {
+  content: "";
+  width: 105px;
+  height: 105px;
+  background: #ff2f7d;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 28px #ff2f7d;
+}
+
+.corazon::before {
+  left: -52px;
+  top: 0;
+}
+
+.corazon::after {
+  left: 0;
+  top: -52px;
+}
+
+.inicio-card h1 {
+  font-size: clamp(2.2rem, 7vw, 4.7rem);
+  margin-bottom: 12px;
+  color: #ffffff;
+  text-shadow: 0 0 14px #ff4f91, 0 0 34px #ff4f91;
+  letter-spacing: 1px;
+}
+
+.inicio-card h2 {
+  color: #ffc4db;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 3.5vw, 1.55rem);
+  margin-bottom: 15px;
+}
+
+.fecha {
+  color: #ffeaf2;
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+}
+
+.boton {
+  display: inline-block;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #ff2f7d, #ff84b4);
+  color: white;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 22px rgba(255, 47, 125, 0.75);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.boton:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 32px rgba(255, 47, 125, 0.95);
+}
+
+.indicacion {
+  margin-top: 18px;
+  color: #ffd6e8;
+  animation: parpadeo 1.6s infinite;
+}
+
+.carta-seccion {
+  min-height: 100vh;
+  padding: 70px 18px 80px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.papel {
+  width: min(94vw, 850px);
+  background: rgba(255, 253, 248, 0.96);
+  color: #3b2631;
+  border-radius: 28px;
+  padding: clamp(25px, 5vw, 58px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 182, 210, 0.7);
+  position: relative;
+  overflow: hidden;
+  animation: subirCarta 1.2s ease both;
+}
+
+.papel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 143, 189, 0.2), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(255, 47, 125, 0.16), transparent 35%);
+  pointer-events: none;
+}
+
+.contenido-carta {
+  position: relative;
+  z-index: 2;
+}
+
+.encabezado {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.encabezado .fecha-carta {
+  color: #8a4c66;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.encabezado h2 {
+  color: #db2f72;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-bottom: 8px;
+}
+
+.linea {
+  width: 130px;
+  height: 3px;
+  margin: 16px auto 0;
+  background: linear-gradient(90deg, transparent, #ff2f7d, transparent);
+  border-radius: 20px;
+}
+
+.texto p {
+  font-size: clamp(1rem, 2.5vw, 1.16rem);
+  line-height: 1.9;
+  margin-bottom: 17px;
+  text-align: justify;
+}
+
+.despedida {
+  margin-top: 28px;
+  text-align: right;
+  color: #7b2b50;
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+.firma {
+  color: #db2f72;
+  font-size: 1.45rem;
+  font-weight: 800;
+  font-family: "Segoe Script", "Brush Script MT", cursive;
+}
+
+.botones-finales {
+  text-align: center;
+  margin-top: 35px;
+}
+
+.corazon-flotante {
+  position: fixed;
+  color: rgba(255, 210, 229, 0.85);
+  z-index: 1;
+  animation: flotar 8s linear infinite;
+  pointer-events: none;
+  text-shadow: 0 0 10px rgba(255, 47, 125, 0.8);
+}
+
+@keyframes latir {
+  0%, 100% {
+    transform: rotate(45deg) scale(1);
+  }
+
+  25% {
+    transform: rotate(45deg) scale(1.12);
+  }
+
+  45% {
+    transform: rotate(45deg) scale(1);
+  }
+
+  70% {
+    transform: rotate(45deg) scale(1.18);
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes subirCarta {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes parpadeo {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(110vh) rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-15vh) rotate(360deg) scale(1.15);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .pantalla-inicio {
+    padding: 18px;
+  }
+
+  .inicio-card {
+    padding: 28px 20px;
+  }
+
+  .corazon {
+    width: 78px;
+    height: 78px;
+    margin-bottom: 28px;
+  }
+
+  .corazon::before,
+  .corazon::after {
+    width: 78px;
+    height: 78px;
+  }
+
+  .corazon::before {
+    left: -39px;
+  }
+
+  .corazon::after {
+    top: -39px;
+  }
+
+  .texto p {
+    text-align: left;
+    line-height: 1.75;
+  }
+
+  .despedida {
+    text-align: left;
+  }
+}
